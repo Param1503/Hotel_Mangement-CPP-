@@ -1,0 +1,146 @@
+#include<iostream>
+#include<stdlib.h>
+#include<string.h>
+#include<conio.h>
+using namespace std;
+
+class loginpage
+{
+    private:
+        char username[20];
+        char password[16];
+        char exusername[20];
+        char expassword[16];
+        bool signinusercmp;
+        bool signinpasscmp;
+        bool signupcmp;
+
+    public:
+        void signin()
+        {
+            system("cls");
+            cout<<"Enter your Username"<<endl;
+            cin>>username;
+            cout<<"Enter your Password"<<endl;
+            cin>>password;
+            signinpasscmp=strcmp(password,expassword);
+            signinusercmp=strcmp(username,exusername);
+            if(signinpasscmp==0 && signinusercmp==0)
+            {
+                cout<<"Correct Password"<<endl;
+                getch();                
+            }
+            else
+            {
+                cout<<"Wrong Password or Username"<<endl;
+                getch();
+            }
+        }
+        void signup()
+        {
+            system("cls");
+            cout<<"Enter a Username"<<endl;
+            cin>>exusername;
+            cout<<"Enter a Password"<<endl;
+            cin>>expassword;
+            cout<<"Confirm your Password"<<endl;
+            cin>>password;
+            signupcmp=strcmp(expassword,password);
+            if(signupcmp==0)
+            {
+                cout<<"Your account has been created"<<endl;
+                getch();
+            }
+            else
+            {
+                cout<<"Your password doesn't match"<<endl;
+                getch();
+            }
+
+        }
+
+};
+
+class room
+{
+    private:
+        int room_no;
+        bool availablity;
+        float room_price;
+    public:
+        void get_roomdata()
+        {
+            cout<<"Enter Room No."<<endl;
+            cin>>room_no;
+            cout<<"Enter price for the room"<<endl;
+            cin>>room_price;
+            cout<<"Enter Room availabality: 0 for available & 1 for occupied"<<endl;
+            cin>>availablity;
+        }
+        void display_roomdata()
+        {
+            cout<<"Room Number:"<<room_no<<endl;
+            cout<<"Room price:"<<room_price<<endl;
+            cout<<"Availablity"<<availablity<<endl;
+        }
+};
+
+class food
+{
+    private:
+        char food_name[20];
+        float food_price;
+    public:
+        void get_fooddata()
+        {
+            cout<<"Enter item name:"<<endl;
+            cin>>food_name;
+            cout<<"Enter food price"<<endl;
+            cin>>food_price;
+        }
+        void display_fooddata()
+        {
+            cout<<"Item name:"<<food_name<<endl;
+            cout<<"Item price:"<<food_price<<endl;
+        }
+};
+
+int main()
+{
+    loginpage login;
+    int loginop;
+    system("cls");
+    while(loginop!=3)
+    {
+        start:
+        loginop=0;
+        cout<<"Welcome to Hotel"<<endl;
+        cout<<"1. Signin"<<endl<<"2. Signup"<<endl<<"3. Exit";
+        cout<<endl<<endl<<"Select an option"<<endl;
+        cin>>loginop;
+        switch(loginop)
+        {
+            case 1:
+                login.signin();
+                system("cls");
+                goto start;
+
+                break;
+            case 2:
+                login.signup();
+                system("cls");                                
+                goto start;
+                break;
+            case 3:
+                system("cls");
+                exit(loginop==3);
+            default:
+                cout<<"Invalid Option"<<endl;
+                getch();
+                system("cls");
+                goto start;
+                break;
+        }
+    }
+    return 0;
+}
